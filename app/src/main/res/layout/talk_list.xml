@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <LinearLayout
+        android:id="@+id/TestHeader"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:orientation="horizontal" >
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:onClick="onTestButtonClicked0"
+            android:text="나" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:onClick="onTestButtonClicked1"
+            android:text="나 3" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:onClick="onTestButtonClicked2"
+            android:text="나딴" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:onClick="onTestButtonClicked3"
+            android:text="나딴 3" />
+    </LinearLayout>
+
+    <FrameLayout
+        android:id="@+id/talkListHeader"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/TestHeader" >
+
+        <RelativeLayout
+            android:id="@+id/informationLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+
+            <Button
+                android:id="@+id/talkListBackButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:onClick="onBackButtonClicked"
+                android:text="뒤로"
+                android:visibility="visible" />
+
+            <TextView
+                android:id="@+id/callingNumber"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBaseline="@+id/talkListBackButton"
+                android:layout_toLeftOf="@+id/callMessageSender"
+                android:layout_toRightOf="@+id/talkListBackButton"
+                android:ellipsize="end"
+                android:gravity="start"
+                android:singleLine="true"
+                android:textSize="15dp" />
+
+            <Button
+                android:id="@+id/callMessageSender"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toLeftOf="@+id/deleteMessageButton"
+                android:onClick="onCallButtonClicked"
+                android:text="전화" />
+
+            <Button
+                android:id="@+id/deleteMessageButton"
+                style="?android:attr/buttonStyleSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toLeftOf="@+id/saveTemporaryStorageMessageButton"
+                android:onClick="onDeleteButtonClicked"
+                android:text="버리기" />
+            <Button 
+                android:id="@+id/saveTemporaryStorageMessageButton"
+                style="?android:attr/buttonStyleSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:onClick="onSaveTemporaryStorageMessageButtonClicked"
+                android:text="임시 저장"
+                />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/deleteCheckLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone" >
+
+            <CheckBox
+                android:id="@+id/allCheckBox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBaseline="@+id/allCheckBoxTextViewsLayout"
+                android:layout_centerVertical="true"
+                android:layout_margin="5dp"
+                android:onClick="onAllCheckBoxClicked" />
+
+            <LinearLayout
+                android:id="@+id/allCheckBoxTextViewsLayout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@+id/allCheckBox"
+                android:orientation="horizontal" 
+                >
+
+                <TextView
+                    android:id="@+id/checkItemCountTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:text="0"
+                    android:textSize="15dp"
+                    />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_toRightOf="@+id/checkItemCountTextView"
+                    android:text="개 선택"
+                    android:textSize="15dp" 
+                    />
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/checkCompletionButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:onClick="onCompletionButtonClicked"
+                android:text="완료" />
+        </RelativeLayout>
+    </FrameLayout>
+
+    <ListView
+        android:id="@+id/talkListView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/talkListBottom"
+        android:layout_below="@+id/talkListHeader"
+        android:divider="#FFFFFFFF"
+        android:dividerHeight="0px"
+        android:stackFromBottom="true"
+        android:transcriptMode="alwaysScroll" >
+    </ListView>
+
+    <FrameLayout 
+        android:id="@+id/talkListBottom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        >
+        <include layout = "@layout/send_message_layout"/>
+    </FrameLayout>
+
+</RelativeLayout>

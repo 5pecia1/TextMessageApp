@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="main_list_item_size">60dp</dimen>
+    <dimen name="talk_box_shape_size">60dp</dimen>
+    <dimen name="stting_item_size">15dp</dimen>
+</resources>

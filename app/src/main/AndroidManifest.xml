@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.ezmessage"
+    android:versionCode="1"
+    android:versionName="1.0" >
+    
+	<!-- suppress DeprecatedClassUsageInspection -->
+    <uses-permission android:name="android.permission.GET_TASKS" />
+    <uses-permission android:name="android.permission.RECEIVE_SMS" />
+    <uses-permission android:name="android.permission.READ_SMS" />
+    <uses-permission android:name="android.permission.DELETE_SMS" />
+    <uses-permission android:name="android.permission.WRITE_SMS" />
+    <uses-permission android:name="android.permission.SEND_SMS" /><!-- SmsManager.sendTextMessage() -->
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
+    
+    <uses-sdk
+        android:minSdkVersion="8"
+        android:targetSdkVersion="22" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/ic_launcher"
+        android:label="@string/app_name"
+        android:theme="@style/AppTheme" 
+        >
+        <activity
+            android:name=".MainActivity"
+            android:label="@string/app_name" 
+            android:windowSoftInputMode="stateAlwaysHidden"
+            >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        
+        <activity android:name="com.example.ezmessage.menu.MainSettingActivity"></activity>
+        
+        <activity android:name="com.example.ezmessage.menu.setting.QuickReplyPhrasesActivity"></activity>
+        <activity android:name="com.example.ezmessage.menu.setting.QuickReplyPhrasesInsertActivity"></activity>
+        <activity android:name="com.example.talk_list.TalkActivity"></activity>
+        <activity android:name="com.example.new_message.NewMessageActivity"></activity>
+        <activity android:name="com.example.broadcast.RecivedMessageSendActivity"></activity>
+        
+        <service android:name="com.example.broadcast.ReadCheckService"
+            android:enabled="true"></service>
+        
+        <!-- 앱이 수신된 문자를 직접 받게 함 -->
+        <receiver android:name="com.example.broadcast.SMSBroadcast"
+            android:permission="android.permission.BROADCAST_SMS" 
+            >
+            <intent-filter >
+                 <action android:name="android.provider.Telephony.SMS_RECEIVED" />
+                 <action android:name="android.provider.Telephony.SMS_DELIVER"/>
+            </intent-filter>
+        </receiver>
+        
+        <!-- 앱이 수신된 MMS를 직접 받게 함 -->
+        <receiver 
+            android:name="com.example.broadcast.MMSBroadcast"
+            android:permission="android.permission.BROADCAST_WAP_PUSH"
+            >
+            <intent-filter >
+                <action android:name="android.provider.Telephony.WAP_PUSH_DELIVER"/>
+                <data android:mimeType="application/vnd.wap.mms-message"/>
+            </intent-filter>
+        </receiver>
+        
+        <!-- 메시지를 전달하길 원하는 다른 앱으로 부터 인텐트를 받게함 -->
+        <activity android:name="com.example.broadcast.ComposeSMSActivity" >
+            <intent-filter >
+                <action android:name="android.intent.action.SEND"/>
+                <action android:name="android.intent.action.SENDTO"/>
+                <action android:name="android.intent.category.DEFAULT"/>
+                <action android:name="android.intent.category.BROWSABLE"/>
+                <data android:scheme="sms"/>
+                <data android:scheme="smsto"/>
+                <data android:scheme="mms"/>
+                <data android:scheme="mmsto"/>
+            </intent-filter>
+        </activity>
+        
+        <!-- Service that delivers message from the phone "quick response" -->
+        <service android:name="com.example.broadcast.HeadlessSMSSendService" 
+            android:permission="android.permission.SEND_RESPOND_VIA_MESSAGE"
+            android:exported="true"
+            >
+            <intent-filter >
+                <action android:name="android.intent.action.RESPOND_VIA_MESSAGE"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <data android:scheme="sms"/>
+                <data android:scheme="smsto"/>
+                <data android:scheme="mms"/>
+                <data android:scheme="mmsto"/>
+            </intent-filter>
+        </service>
+    </application>
+
+</manifest>

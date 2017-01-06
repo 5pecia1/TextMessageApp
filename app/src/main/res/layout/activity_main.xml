@@ -1,0 +1,104 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="${relativePackage}.${activityClass}" >
+    
+    <LinearLayout
+        android:id="@+id/not_default_app"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:orientation="horizontal" >
+
+<!--         android:visibility="gone" -->
+
+<!--             android:id="@+id/not_default_app" -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" 
+            android:text="기본앱으로 설정 해주세요"
+            />
+        <Button 
+            android:id="@+id/change_default_app"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="기본앱 설정"
+            />
+    </LinearLayout>
+    
+	<RelativeLayout 
+	    android:id="@+id/header"
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    android:paddingTop="10dp"
+	    android:paddingRight="5dp"
+	    android:paddingLeft="5dp"
+	    android:paddingBottom="10dp"
+	    android:background="#eeff6600"
+	    android:layout_below="@+id/not_default_app"
+	    >
+	    <TextView
+	        android:id="@+id/messageID"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:textSize="30dp"
+	        android:text="메시지" />
+	    <EditText
+	        android:id="@+id/searchMessageEditText"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_toRightOf="@+id/messageID"
+	        android:layout_toLeftOf="@+id/messageButton"
+	        android:layout_alignBaseline="@+id/messageID"
+	        android:layout_marginLeft="5dp"
+	        android:layout_marginRight="5dp"
+	        />
+	    <Button
+	        android:id="@+id/messageButton"
+	        style="?android:attr/buttonStyleSmall"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_toLeftOf="@+id/optionMenuButton"
+	        android:layout_alignParentTop="true"
+	        android:layout_alignBaseline="@+id/messageID"
+	        android:text="검색"
+	        android:onClick="onSearchButtonClicked"
+	        />
+
+	    <Button
+	        android:id="@+id/optionMenuButton"
+	        style="?android:attr/buttonStyleSmall"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_alignBaseline="@+id/messageButton"
+	        android:layout_alignBottom="@+id/messageButton"
+	        android:layout_alignParentRight="true"
+	        android:text="설정" 
+	        android:onClick="onOptionMenuButtonClicked"
+	        />
+
+	</RelativeLayout>
+    
+
+    <ListView
+        android:id="@+id/mainListView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/header"
+        >
+	    
+    </ListView>
+    
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:text="작성"
+        android:onClick="onWriteButtonClicked"
+        />
+    
+</RelativeLayout>
